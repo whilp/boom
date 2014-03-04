@@ -160,6 +160,7 @@ def onecall(method, url, results, **options):
     """
     start = time.time()
 
+    options['verify'] = False
     if 'data' in options and callable(options['data']):
         options = copy(options)
         options['data'] = options['data'](method, url, options)
