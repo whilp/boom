@@ -345,7 +345,7 @@ def main():
                         action='store_true')
 
     parser.add_argument('--no-verify',
-                        help='Disable SSL certificate verification'
+                        help='Disable SSL certificate verification',
                         action='store_true')
 
     group = parser.add_mutually_exclusive_group()
