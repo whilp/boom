@@ -344,6 +344,10 @@ def main():
                              'default format',
                         action='store_true')
 
+    parser.add_argument('--no-verify',
+                        help='Disable SSL certificate verification'
+                        action='store_true')
+
     group = parser.add_mutually_exclusive_group()
 
     group.add_argument('-n', '--requests', help='Number of requests',
@@ -402,7 +406,8 @@ def main():
             url, args.requests, args.concurrency, args.duration,
             args.method, args.data, args.content_type, args.auth,
             headers=headers, pre_hook=args.pre_hook,
-            post_hook=args.post_hook, quiet=args.json_output)
+            post_hook=args.post_hook, quiet=args.json_output,
+            verify=not args.no_verify)
     except RequestException as e:
         print_errors((e, ))
         sys.exit(1)
