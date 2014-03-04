@@ -188,7 +188,7 @@ def onecall(method, url, results, **options):
 def run(
     url, num=1, duration=None, method='GET', data=None, ct='text/plain',
         auth=None, concurrency=1, headers=None, pre_hook=None, post_hook=None,
-        quiet=False):
+        quiet=False, verify=True):
 
     if headers is None:
         headers = {}
@@ -215,6 +215,8 @@ def run(
     if auth is not None:
         options['auth'] = tuple(auth.split(':', 1))
 
+    options['verify'] = verify
+
     pool = Pool(concurrency)
 
     start = time.time()
@@ -225,6 +227,7 @@ def run(
     try:
         if num is not None:
             jobs = [pool.spawn(onecall, method, url, res, **options)
+
                     for i in range(num)]
             pool.join()
         else:
