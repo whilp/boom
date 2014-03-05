@@ -160,7 +160,6 @@ def onecall(method, url, results, **options):
     """
     start = time.time()
 
-    options['verify'] = False
     if 'data' in options and callable(options['data']):
         options = copy(options)
         options['data'] = options['data'](method, url, options)
@@ -274,7 +273,7 @@ def resolve(url):
 def load(url, requests, concurrency, duration, method, data, ct, auth,
          headers=None, pre_hook=None, post_hook=None, quiet=False, verify=True):
     if not quiet:
-        print_server_info(url, method, headers=headers)
+        print_server_info(url, method, headers=headers, verify=verify)
 
         if requests is not None:
             print('Running %d queries - concurrency %d' % (requests,
