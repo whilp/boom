@@ -124,8 +124,8 @@ def print_stats(results):
     print('BSI: Boom Speed Index')
 
 
-def print_server_info(url, method, headers=None):
-    res = requests.head(url)
+def print_server_info(url, method, verify=True, headers=None):
+    res = requests.head(url, verify=verify)
     print(
         'Server Software: %s' %
         res.headers.get('server', 'Unknown'))
